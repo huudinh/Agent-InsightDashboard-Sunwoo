@@ -222,4 +222,5 @@ Bảng đầy đủ **14 slot**: [`sw-E`](knowledge/sw-E-module-sunwoo.md) §5.
 | [`doc/01-cai-dat.md`](doc/01-cai-dat.md) | Ba cách cài · khuôn file hội thoại · **10 câu kiểm sau khi cài** |
 | [`doc/CHANGELOG.md`](doc/CHANGELOG.md) | Quyết định kiến trúc · ★ **năm lỗi bắt được khi chạy thử** |
 | [`prompts/`](prompts/) | 4 prompt: `đọc` · `insight` · `qc` · `tường ngăn` |
-"# Agent-InsightDashboard-Sunwoo" 
+| ★ [**Trang hướng dẫn + 17 prompt mẫu**](https://claude.ai/artifact/6qS15rkfAPoTpyyoxu23vh) | Trang web một file: ba cách cài · **20 file bấm Copy từng file** · **17 prompt bấm Copy là dùng** · 10 câu smoke test · sáu điều phải biết · 14 việc đang chặn |
+| [`tools/huong-dan.html`](tools/huong-dan.html) | Chính trang trên, bản sinh tại chỗ — `python tools/trang-huong-dan.py` sinh lại từ [`tools/huong-dan.json`](tools/huong-dan.json) |

@@ -1,0 +1,511 @@
+{
+ "ma": "insightdashboard-sunwoo",
+ "title": "Insight Dashboard Sunwoo",
+ "h1": "Agent đọc Insight khách Sunwoo (PH)",
+ "eyebrow": "Hai dòng &middot; hai tường ngăn &mdash; Hướng dẫn cài đặt &amp; prompt mẫu",
+ "ten_agent": "Agent-InsightDashboard-Sunwoo",
+ "repo": "https://github.com/huudinh/Agent-InsightDashboard-Sunwoo",
+ "buoc2": "<b>Thẻ A</b> vào ô chỉ dẫn",
+ "brain": "SYSTEM-PROMPT.md",
+ "brain_ngan": "SYSTEM-PROMPT-NGAN.md",
+ "mo_ta_agent": "Agent đọc insight khách của Sunwoo Medical Center — một cơ sở ở 20 Upper McKinley Hill, Taguig, Metro Manila, với HAI dòng dịch vụ: thẩm mỹ (sunwooaesthetic.ph) và nha khoa (sunwoodental.ph). Từ hội thoại khách nhắn vào, nó trả hai thứ cho hai người khác nhau: insight khách cho Marketing, và QC trực page cho trưởng nhóm. Hai dòng và hai luồng được tách bằng HAI TƯỜNG NGĂN dựng trong cấu trúc dữ liệu, kiểm bằng máy.",
+ "lede": "Đây là <b>agent đọc insight khách</b> cho một cơ sở có <b>hai dòng dịch vụ</b>. Nó đọc <b>chính lời khách nhắn vào</b> rồi trả lời: <b>khách là ai · họ ở chặng nào · họ vướng rào nào · họ rơi vì ai · kỳ tới làm gì</b> — và trả lời <b>riêng cho từng dòng</b>, vì quyết định mua của hai dòng khác nhau về bản chất.",
+ "quick": "Gõ <b>ĐỌC</b> kèm file hội thoại &rarr; agent in <b>tổng HT phân biệt</b>, tách hai dòng, rồi dừng ở <b>CỔNG G</b> nếu quá 20% hội thoại ⛔ không rõ khu vực. ⛔ Nó không đoán dòng và ⛔ không đoán vành đai.",
+ "dim": "★ <b>Hai tường, hai loại khác nhau:</b> tường <b>dòng</b> chặn <i>phép chia</i>, tường <b>luồng</b> chặn <i>trường dữ liệu</i>. Phép thử một hội thoại: <i>&ldquo;con số này nói về dòng nào, và mẫu số của nó là bao nhiêu?&rdquo;</i>",
+ "chips": [
+  "v1.0",
+  "14 sổ tri thức",
+  "4 prompt mẫu",
+  "★ HAI tường ngăn",
+  "4 cổng chặn",
+  "TC-1…TC-10",
+  "10 cờ đỏ CĐ-S",
+  "pháp lý PH · RA 10173",
+  "an toàn trước bán hàng",
+  "⛔ chưa chạy dữ liệu thật"
+ ],
+ "muc": [
+  "Cài đặt",
+  "Prompt mẫu",
+  "Sáu điều phải biết",
+  "Việc đang chặn"
+ ],
+ "cai_dat_intro": "Agent là <b>prompt + tri thức</b>, không phải phần mềm. Ba bước: tạo trợ lý &rarr; dán bộ não &rarr; upload 20 file. ★ <b>Và một bước thứ tư ⛔ không bỏ được:</b> upload thêm <b>bốn sổ nhập</b> của <code>Agent-AdsOptimize-Phi</code> — thiếu chúng thì agent ⛔ không có vành đai <code>V1</code>–<code>V4</code>, ⛔ không có phễu <code>S1</code>–<code>S6</code>, ⛔ không có checklist 12 ô, và nó sẽ <b>đặt mã mới cho những thứ đã có mã</b>.",
+ "dl_mo_ta": "Toàn bộ repo: bộ não đầy đủ và bản ngắn · 14 sổ tri thức · 4 prompt · script <code>sw.py</code> chạy thật · từ điển khớp tiếng Anh · 25 hội thoại mẫu (cả hai dòng) để chạy thử ngay khi chưa có dữ liệu thật.",
+ "cau_mo_dau": [
+  "ĐỌC hội thoại kỳ 28/10–03/11. Đính kèm file hội thoại.",
+  "INSIGHT dòng d, kỳ này — khách nha khoa đang tắc ở chặng nào?",
+  "Tỷ lệ khách hỏi giá rồi im của phòng khám là bao nhiêu?"
+ ],
+ "the_mo_ta": "Thẻ A và B <b>dán vào ô văn bản</b> của nền tảng. Chọn đúng một thẻ theo nền tảng bạn dùng.",
+ "the": [
+  {
+   "ma": "brain",
+   "nhan": "Thẻ A",
+   "ten": "Bộ não đầy đủ",
+   "nen_tang": "Claude &amp; Gemini",
+   "mo_ta": "§0–§12: hai dòng · hai luồng · <b>hai tường</b> · ranh giới với <code>Agent-AdsOptimize-Phi</code> · ★ <b>luật sổ nhập — sổ ngoài thắng</b> · bộ mã và <b>ba va chạm mã</b> · bốn cổng chặn · ★ <b>mười một luật bất biến</b> · bảy slot 🔴 · danh sách ⛔ tuyệt đối không · cách xử khi thiếu dữ liệu."
+  },
+  {
+   "ma": "ngan",
+   "nhan": "Thẻ B",
+   "ten": "Bản ngắn",
+   "nen_tang": "ChatGPT",
+   "tran": 8000,
+   "mo_ta": "Giữ nguyên <b>hai tường</b>, bộ mã, <b>mười một luật</b>, dữ liệu sức khoẻ <code>RA 10173</code>, bảy slot và danh sách cấm. <b>Bỏ phần giải thích vì sao</b> — phần đó nằm trong sổ Knowledge, vẫn được nạp nên nội dung ⛔ không mất. <b>⚠️ Bản ngắn đã gần kín</b> — lần thêm luật sau buộc phải nén thêm."
+  }
+ ],
+ "tabs": [
+  {
+   "ten": "Claude Project",
+   "tieu_de": "Claude Project — khuyến nghị",
+   "mo_ta": "Ô chỉ dẫn không giới hạn ký tự nên dùng được bộ não đầy đủ. Agent này phải giữ hội thoại + 14 sổ của repo + 4 sổ nhập cùng lúc, nên cửa sổ rộng là lợi thế thật.",
+   "buoc": [
+    "<b>Projects</b> &rarr; <b>Create project</b>, tên và mô tả lấy ở khối phía trên.",
+    "<b>Custom instructions</b> &rarr; dán <b>Thẻ A &middot; Bộ não đầy đủ</b>.",
+    "<b>Add content</b> &rarr; upload <b>đủ 20 file</b> ở khối dưới.",
+    "★ <b>Upload thêm BỐN SỔ NHẬP</b> từ <code>Agent-AdsOptimize-Phi</code> — chúng <b>thắng</b> sổ của repo này khi mâu thuẫn: <code>kn-ho-so-thuong-hieu-sunwoo</code> · <code>kn-vung-philippines</code> · <code>kn-rao-phap-ly-ph</code> · <code>kn-chan-dung-hanh-trinh-ph</code>.",
+    "Mở chat mới &rarr; chạy <b>10 câu smoke test</b>. Sai câu nào thì thiếu file tương ứng."
+   ],
+   "ghi_chu": "⛔ Đừng upload tri thức của <code>Agent-InsightDashboard-Kangnam</code> · <code>-Paris</code> · <code>-KNQT</code> vào project này. Bộ mã khác, luật hiển thị giá khác, và <b>luật của một nước khác</b> <i>(Việt Nam <code>91/2025/QH15</code>)</i> — trộn vào thì agent sẽ <b>trích luật sai nước</b>. Ở đây là <b>Philippines <code>RA 10173</code></b>."
+  },
+  {
+   "ten": "ChatGPT Custom GPT",
+   "tieu_de": "ChatGPT — ô Instructions có trần 8.000 ký tự",
+   "mo_ta": "Dán <b>Thẻ B · bản ngắn</b> (7.931 ký tự) vào Instructions, phần còn lại lên Knowledge như Claude — ★ <b>kể cả bốn sổ nhập</b>.",
+   "buoc": [
+    "<b>Explore GPTs</b> &rarr; <b>Create</b> &rarr; tab <b>Configure</b>.",
+    "<b>Instructions</b> &rarr; dán <b>Thẻ B</b>. ⛔ Thẻ A sẽ bị cắt mất phần cuối.",
+    "<b>Knowledge</b> &rarr; upload <b>20 file</b> + <b>4 sổ nhập</b>.",
+    "<b>Conversation starters</b> &rarr; dán ba câu mở đầu ở khối trên."
+   ],
+   "ghi_chu": "Sau mỗi lần sửa bản ngắn, chạy <code>python tools/dem-ngan.py</code> để canh trần 8.000 ký tự. Hiện còn <b>69 ký tự</b> dư."
+  },
+  {
+   "ten": "Gemini Gem",
+   "tieu_de": "Gemini — ô Chỉ dẫn",
+   "buoc": [
+    "<b>Gem manager</b> &rarr; <b>New Gem</b>.",
+    "<b>Chỉ dẫn</b> &rarr; dán <b>Thẻ A &middot; Bộ não đầy đủ</b>.",
+    "<b>Knowledge</b> &rarr; upload <b>20 file</b> + <b>4 sổ nhập</b>.",
+    "Chạy <b>10 câu smoke test</b>."
+   ]
+  }
+ ],
+ "files_mo_ta": "Thứ tự dưới đây <b>là thứ tự agent đọc</b>: <b>vai trò &amp; hai tường &rarr; đầu vào &rarr; ★ hai dòng hai phễu &rarr; bảng dữ kiện &rarr; module brand &rarr; ★ CỔNG T &rarr; pháp lý PH &rarr; luồng I (4 sổ) &rarr; luồng Q (3 sổ) &rarr; prompt &rarr; tài liệu</b>.",
+ "files_canh_bao": "<p style=\"margin-bottom:0\">★ <b>Ba sổ lõi nhất là <code>sw-C</code>, <code>sw-F</code> và <code>sw-A</code>.</b> <code>sw-C</code> giữ lý do <b>⛔ không gộp hai dòng vào một phễu</b> — quyết định mua của implant khác <b>về bản chất</b> với quyết định mua của một liệu trình nhiều buổi. <code>sw-F</code> giữ <b>CỔNG T tám câu</b>, cổng duy nhất <b>từ chối ghi file</b>. Và <code>sw-A</code> giữ <b>luật sổ nhập</b> — thiếu nó thì agent sẽ đặt mã mới cho những thứ <b>đã có mã</b> ở bốn sổ của <code>Agent-AdsOptimize-Phi</code>, và ⛔ không ai nhận ra.</p>",
+ "files": [
+  {
+   "duong_dan": "knowledge/sw-A-vai-tro-hai-tuong.md",
+   "badge": "★★ lõi nhất",
+   "mo_ta": "<b>Vai trò · hai tường · bộ mã</b> — ★ <b>luật sổ nhập: sổ ngoài THẮNG</b> · ★ hai tường <b>CỘNG</b> vào nhau ⛔ không nhân lên · ô <code>cheo</code> · bốn cổng · ★ <b>CỔNG G</b> · <b>ba va chạm mã</b> · ★ giá của việc chỉ đọc English."
+  },
+  {
+   "duong_dan": "knowledge/sw-B-doc-dau-vao.md",
+   "badge": "lõi",
+   "mo_ta": "<b>Đọc đầu vào</b> — kênh PH <i>(Messenger số 1 · KakaoTalk ⛔ chưa đọc được)</i> · khuôn file · ẩn danh <b>ở bước ĐỌC</b> · ★ <b>dữ liệu sức khoẻ <code>RA 10173</code></b> <i>(⛔ không phải luật Việt Nam)</i> · ★★ <b>ba bẫy khớp tiếng Anh</b>."
+  },
+  {
+   "duong_dan": "knowledge/sw-C-hai-dong-hai-phe-u.md",
+   "badge": "★★ lõi nhất",
+   "mo_ta": "★★ <b>Hai dòng khác nhau ở QUYẾT ĐỊNH MUA</b> ⛔ không ở dịch vụ · phễu <b><code>SD1</code>–<code>SD6</code></b> và rào <b><code>LÂU</code></b> · ★ <code>NGỜ</code> xuất hiện <b>HAI lần</b> · <code>CD-D1</code>–<code>CD-D6</code> · ★ <b>an toàn trước bán hàng, HAI BẬC</b> · <code>lam_o_dau</code> là dữ kiện độc lập."
+  },
+  {
+   "duong_dan": "knowledge/sw-D-bang-du-kien-va-dau-ra.md",
+   "badge": "lõi",
+   "mo_ta": "<b>Bảng dữ kiện gốc &amp; đầu ra</b> — cột nào vào nhánh nào · ★ <code>dong_hoi</code> là <b>danh sách</b> · ★ <code>tong_ht</code> ⛔ <b>KHÔNG bằng</b> <code>n(a)+n(d)</code> · ba luật của ô <code>cheo</code> · sáu file, hai nhóm quyền."
+  },
+  {
+   "duong_dan": "knowledge/sw-E-module-sunwoo.md",
+   "badge": "module brand",
+   "mo_ta": "<b>Module Sunwoo</b> — định danh dòng nha khoa · hai bác sĩ · ★★ <b>ba chỗ hai site ⛔ KHÔNG khớp nhau</b> <i>(hotline lệch 4 số cuối · tên bao trùm · phạm vi giấy phép)</i> · ★ <b>14 slot phải cấp</b>."
+  },
+  {
+   "duong_dan": "knowledge/sw-F-hai-tuong-cong-t.md",
+   "badge": "★★ lõi nhất",
+   "mo_ta": "★★ <b>Hai tường · CỔNG T tám câu chạy BẰNG MÁY</b> · bảng thẩm quyền từng cột · ★ <b>mẫu số của ô <code>cheo</code></b> <i>(chỗ dễ sai nhất cả repo)</i> · cờ đỏ qua tường một chiều · ★ <b>bốn cách tường bị phá</b>."
+  },
+  {
+   "duong_dan": "knowledge/sw-G-phap-ly-ph-cho-bao-cao.md",
+   "badge": "★ lõi",
+   "mo_ta": "<b>Pháp lý PH cho báo cáo</b> — ★★ <b>hai câu mạnh nhất trên site trả lời đúng hai rào quyết định mà ⛔ cả hai ⛔ không dùng được</b> · bảng câu ⛔ không dùng lại được · ✅ bảng <b>dùng được ngay</b> · chứng thực &amp; ảnh trước/sau · ba cửa duyệt."
+  },
+  {
+   "duong_dan": "knowledge/sw-I1-chan-dung-cong-0.md",
+   "badge": "luồng I",
+   "mo_ta": "<b>Chân dung · CỔNG 0</b> — ⛔ hệ ⛔ không có bộ chân dung đã duyệt cho dòng nào · ★ <b>BỐN nhãn</b> <i>(<code>KHUÔN</code>/<code>PHÁC</code>/<code>CHUẨN</code>/<code>MỎNG</code>)</i> · ★ <b>năm cổng ổn định</b> · ★ ba cách phác sai, đều im lặng."
+  },
+  {
+   "duong_dan": "knowledge/sw-I2-dao-sau-insight.md",
+   "badge": "luồng I",
+   "mo_ta": "<b>Câu hỏi ngầm</b> · ★★ <b>ba nhánh rơi: HỆ / NỘI DUNG / NGƯỜI</b> + phép thử một câu · ★★ <b>luật chống vòng tròn <code>% HOT*</code></b> · hội thoại ngắn là nhóm đông nhất · <code>DV-A0</code>/<code>DV-D0</code>."
+  },
+  {
+   "duong_dan": "knowledge/sw-I3-ngan-hang-hook-en.md",
+   "badge": "luồng I",
+   "mo_ta": "<b>Hook English</b> — bốn luật nền · policy Meta xét theo <b>claim</b> · ★★ <b>8 hook viết được NGAY hôm nay</b> ⛔ không cần ô dữ liệu nào mới · bảng hook ⏸ <b>chặn bởi slot nào</b> · micro-conversion."
+  },
+  {
+   "duong_dan": "knowledge/sw-I4-ma-tran-uu-tien.md",
+   "badge": "luồng I",
+   "mo_ta": "<b>Ma trận ưu tiên · CỔNG 1</b> — ★ xếp theo <b>SỐ HỘI THOẠI ẢNH HƯỞNG</b> ⛔ không theo tỷ lệ xấu nhất · ★ <b>ô ② là ô quan trọng nhất</b> <i>(việc đúng là một email hỏi một câu)</i> · ba nhịp · ô <b>&ldquo;gỡ luôn&rdquo;</b>."
+  },
+  {
+   "duong_dan": "knowledge/sw-Q1-cham-diem-truc-page.md",
+   "badge": "luồng Q",
+   "mo_ta": "<b><code>TC-1</code>…<code>TC-10</code></b> · ★★ <b><code>TC-8</code> cộng điểm cho việc ⛔ KHÔNG trả lời</b> · ★ <b>năm rào an toàn</b> <i>(rào ⑤ chấm riêng theo dòng)</i> · ★ <code>TC-9</code> gần như luôn <code>&mdash;</code> ở kỳ đầu, và đó là <b>kết quả đúng</b>."
+  },
+  {
+   "duong_dan": "knowledge/sw-Q2-co-do-phap-che.md",
+   "badge": "luồng Q",
+   "mo_ta": "<b><code>CĐ-S1</code>…<code>CĐ-S10</code></b>, mỗi mã nối về <b>đúng một ô</b> của checklist 12 ô · ★★ <b>MIỄN TRỪ XÉT TRƯỚC</b> · ★ <code>CĐ-S4</code> dạng riêng của cơ sở hai dòng · ★ <code>CĐ-S5</code> phải báo <b>kèm số lượt làm đúng</b>."
+  },
+  {
+   "duong_dan": "knowledge/sw-Q3-so-tay-thuc-thi.md",
+   "badge": "luồng Q",
+   "mo_ta": "<b>Sổ tay từng người</b> — ba luật riêng tư · ★ hai dòng &rarr; <b>hai phần</b> · ★★ <b>việc hệ thống ⛔ KHÔNG vào sổ tay của ai</b> · câu thay thế mang <b>trạng thái duyệt</b> · ★ mục <b>&ldquo;⛔ không phải việc của bạn&rdquo;</b>."
+  },
+  {
+   "duong_dan": "prompts/prompt-doc.md",
+   "badge": "prompt",
+   "mo_ta": "<b>Lệnh <code>ĐỌC</code></b> — năm ô in trước mọi con số · ẩn danh ở bước đọc · ★ <b>bốn thứ dễ đọc sai</b> <i>(<code>[Thẻ:]</code> · <code>&ldquo;your clinic&rdquo;</code> · <code>tai-sunwoo</code> một mình · <code>&ldquo;redone&rdquo;</code>)</i>."
+  },
+  {
+   "duong_dan": "prompts/prompt-insight.md",
+   "badge": "★ prompt",
+   "mo_ta": "<b>Lệnh <code>INSIGHT</code></b>, một dòng mỗi lần — phác chân dung &amp; CỔNG 0 · ba nhánh rơi · ★ <b>bảng <code>HOT*</code></b> · hội thoại ≤2 lượt · ★ <b>ô <code>cheo</code> lấy mẫu số TỔNG KỲ</b>."
+  },
+  {
+   "duong_dan": "prompts/prompt-qc.md",
+   "badge": "★ prompt",
+   "mo_ta": "<b>Lệnh <code>QC</code></b>, một dòng mỗi lần — năm rào an toàn · ★ <code>TC-8</code> bảng bốn tình huống · ★ rào ⑤ <i>(82% và 41% dẫn tới việc đúng; 68% dẫn tới việc sai)</i> · hội thoại ⛔ không chấm."
+  },
+  {
+   "duong_dan": "prompts/prompt-tuong-ngan.md",
+   "badge": "★ prompt",
+   "mo_ta": "<b>CỔNG T</b> — tám câu, năm câu đầu chạy <b>bằng máy</b> · bảng <b>ai được xem file nào</b> · ★ <b>bốn cách tường bị phá</b> · luật <b>lọc và gộp, ⛔ không ra quyết định</b>."
+  },
+  {
+   "duong_dan": "doc/01-cai-dat.md",
+   "badge": "tài liệu",
+   "mo_ta": "<b>Cài đặt</b> — ba cách cài · ★ <b>bước 4 ⛔ không bỏ được</b> <i>(bốn sổ nhập)</i> · khuôn file hội thoại · bốn câu trước khi gửi · <b>10 câu kiểm sau khi cài</b>."
+  },
+  {
+   "duong_dan": "doc/CHANGELOG.md",
+   "badge": "tài liệu",
+   "mo_ta": "<b>Lịch sử</b> — năm quyết định kiến trúc · ★ <b>ba phát hiện khi đọc hai site</b> · ★★ <b>năm lỗi bắt được khi chạy thử</b> · những gì ⛔ chưa có."
+  }
+ ],
+ "smoke": [
+  {
+   "go": "Tỷ lệ khách hỏi giá rồi im của phòng khám là bao nhiêu?",
+   "thay": "⛔ <b>Câu này ⛔ không trả lời được cho cả cơ sở.</b> Hai dòng có <b>hai quyết định mua khác nhau về bản chất</b> → phải đưa <b>HAI con số kèm HAI mẫu số</b>.<br>★ Cùng một con số <code>44%</code> dẫn tới <b>hai việc khác nhau hoàn toàn</b>: dòng <code>a</code> sửa bằng <b>bảng liệu trình</b> <i>(nội dung)</i>, dòng <code>d</code> sửa bằng <b>trả góp / HMO</b> <i>(chính sách)</i>. ⚠️ Và người đọc sẽ chọn <b>MỘT</b> — thường là việc của dòng đông hơn.",
+   "nam_o": "sw-C §1",
+   "hl": true
+  },
+  {
+   "go": "Nhân viên trả lời <i>&ldquo;we don't guarantee outcomes&rdquo;</i> — nêu cờ cam kết nhé?",
+   "thay": "⛔ <b>Không.</b> Câu đó <b>chứa</b> <code>guarantee</code> nhưng đây là người <b>đang TỪ CHỐI cam kết</b>, đúng quy trình. <b>Miễn trừ phải xét TRƯỚC</b> khi nêu cờ.<br>★ <b>Nêu cờ cho một người đang làm ĐÚNG là lỗi NẶNG NHẤT hệ này có thể mắc</b> — nặng hơn bỏ sót một cờ. Vì một cờ sai làm hỏng niềm tin vào <b>cả bảng</b>, và khi khối thôi tin thì <b>dữ liệu đầu vào hỏng theo</b>.",
+   "nam_o": "sw-Q2 §1",
+   "hl": true
+  },
+  {
+   "go": "Khách bảo implant cũ lung lay — đây là ca cấp tính chứ?",
+   "thay": "⛔ <b>Chưa chắc.</b> <i>&ldquo;loose, I want it redone&rdquo;</i> là <b><code>CD-D5</code></b> — <b>chân dung đắt nhất của dòng <code>d</code></b>, trả được chi phí cao nhất. Cấp tính cần <b>dấu hiệu + ĐANG DIỄN TIẾN</b> <i>(<code>pus</code> · <code>numb</code> · <code>now</code> · <code>still</code>)</i>.<br>★ Gán <code>cap-tinh</code> oan thì <b>miễn hết các ô chấm</b> → một ca tư vấn tốt ⛔ <b>không được khen</b>. Đó là <b>mất phần khen đúng</b>, cùng họ với lỗi nêu cờ cho người làm đúng.",
+   "nam_o": "sw-C §5",
+   "hl": true
+  },
+  {
+   "go": "Nhân viên ⛔ không trả lời được câu khách hỏi về thời gian cắm implant — trừ điểm chứ?",
+   "thay": "⛔ <b>Không.</b> <i>&ldquo;Let me confirm the timeline with our dentist&rdquo;</i> là <b>cách xử lý ĐÚNG</b> khi slot ③ còn treo → <code>TC-8</code> <b>CỘNG ĐIỂM</b>, <code>TC-9</code> chấm <code>&mdash;</code>, và dòng đó vào <b>mục việc hệ thống</b>.<br>⚠️ Ngược lại, <i>&ldquo;around 2 to 3 months lang po&rdquo;</i> <b>nghe như một câu trả lời tốt</b> nhưng là <code>TC-8</code> ✗ + cờ <code>CĐ-S5</code> — ★ và ⛔ không có luật này thì nó sẽ được chấm ✓.",
+   "nam_o": "sw-Q1 §3"
+  },
+  {
+   "go": "Nhóm <code>DV-D4</code> nóng nhất, dồn nội dung vào đó nhé?",
+   "thay": "⛔ <b>Chưa.</b> Chia nhóm theo <code>DV-*</code> đã <b>cấy bit ①</b> <i>(nêu một dịch vụ cụ thể)</i> vào mọi hội thoại trong nhóm — <b>theo định nghĩa</b>. Nên nhóm nào cũng <i>&ldquo;nóng hơn trung bình&rdquo;</i> <b>theo cấu trúc</b>, và kết luận đó <b>tự chứng minh chính nó</b>.<br>★ Phải xem cột <b><code>HOT*</code></b> — tính lại ⛔ không có bit bị cấy. ⚠️ Bảng ⛔ không có cột đó thì ⛔ <b>không được dùng xếp ưu tiên</b>.",
+   "nam_o": "sw-I2 §3"
+  },
+  {
+   "go": "<code>6/52</code> khách thẩm mỹ hỏi sang nha khoa — <code>12%</code>?",
+   "thay": "⛔ <b>Sai mẫu số.</b> Ô <code>cheo</code> lấy mẫu số là <b>TỔNG KỲ</b>, ⛔ không phải <code>n</code> của một dòng.<br>★ Cùng <b>SÁU</b> hội thoại ra <b>BA</b> con số: <code>6/73=8%</code> ✅ · <code>6/52=12%</code> ⛔ · <code>6/21=29%</code> ⛔. Cả ba trông hợp lý, và <code>52+21=73</code> nên <b>tổng vẫn khớp</b> — ⛔ không ai phát hiện.",
+   "nam_o": "sw-F §2"
+  },
+  {
+   "go": "Khách này đã làm ở chỗ mình → hội thoại phản ánh?",
+   "thay": "⛔ <b>Chưa chắc.</b> <code>tai-sunwoo</code> + <b>dấu hiệu vấn đề</b> = <code>phan-anh</code>. <code>tai-sunwoo</code> + ⛔ không vấn đề = <b><code>quay-lai</code></b> — và đó là <b>TÀI SẢN</b>, đọc cùng ô <code>cheo</code>.<br>★ Gán sai chiều này <b>làm mất ô <code>cheo</code></b> <i>(tài sản riêng của cơ sở hai dòng)</i> và biến <b>một ca bán thêm thành một ca khiếu nại</b>. ⚠️ Đây là lỗi thật đã bắt được khi chạy thử.",
+   "nam_o": "sw-C §4 · §6"
+  },
+  {
+   "go": "In một ví dụ có tên nhân viên cho báo cáo insight sinh động hơn?",
+   "thay": "⛔ <b>Không.</b> Dùng <code>HT-nnn</code> — mã hội thoại truy ngược được cho người <b>CÓ QUYỀN</b> truy ngược, và <b>vô nghĩa</b> với người không có. Đó chính là mục đích.<br>★ Và nếu một phát hiện <b>chỉ giải thích được bằng cách chỉ ra ai làm</b> thì nó ⛔ <b>không phải insight</b> — nó là phát hiện QC <b>đặt sai chỗ</b>. ⚠️ Bản viết đúng <i>(&ldquo;5/21 hội thoại&hellip;&rdquo;)</i> <b>mạnh hơn</b> bản lọt tên, ⛔ không phải yếu hơn.",
+   "nam_o": "sw-F §3"
+  },
+  {
+   "go": "Khách hỏi phải chờ bao lâu mới có răng — trả lời khoảng 3 tháng?",
+   "thay": "⛔ <b>Không.</b> Slot ③ ⛔ chưa cấp. Agent ⛔ <b>không suy từ &ldquo;kiến thức chung&rdquo;</b> — con số đó phụ thuộc <b>hệ implant · mật độ xương · có ghép xương hay không</b>, và <b>bác sĩ ở đây</b> mới biết họ làm theo quy trình nào.<br>★ Ghi <code>⏸ chờ cấp: khoảng tháng cắm → răng cuối — Bác sĩ</code>, và ô <code>TC-9</code> chấm <code>&mdash;</code>.",
+   "nam_o": "sw-E §6"
+  },
+  {
+   "go": "Site ghi <i>&ldquo;100% FDA-approved implants&rdquo;</i>, dùng làm hook được chứ?",
+   "thay": "⛔ <b>Không.</b> <code>100%</code> nằm trong <b>bảng từ cấm</b> <i>(nhóm Cam kết)</i>, và ô ⑦ còn đòi <b>tên thiết bị khớp đăng ký FDA PH</b> — mà <code>DV-D1</code> <i>&ldquo;Smart Bio Implant&rdquo;</i> là <b>tên thương mại ⛔ chưa truy được</b>.<br>★ Và việc câu đó <b>đang ở trên trang</b> làm nó trông <b>như đã được duyệt</b> — ⚠️ đó chính là lý do lỗi này <b>dễ lọt nhất</b>.",
+   "nam_o": "sw-G §2"
+  }
+ ],
+ "smoke_ghi": "<p style=\"margin-bottom:0\"><b>Ba câu đầu là ba câu quan trọng nhất.</b> Cả ba đều cho ra một câu trả lời <b>trông hợp lý</b>, ⛔ không gây lỗi, và ⛔ <b>không nhìn ra được từ bảng</b>. ★ Câu 1 là <b>trộn mẫu số</b> — lỗi im lặng nhất vì tổng vẫn khớp. Câu 2 và câu 3 là hai câu <b>phạt một người đang làm đúng</b>: một cờ sai và một ca bị miễn chấm oan. ⚠️ Loại lỗi thứ hai nguy hiểm hơn loại thứ nhất, vì nó làm cả khối <b>thôi tin vào bảng chấm</b> — và khi họ thôi tin thì <b>dữ liệu đầu vào hỏng theo</b>, agent mất <b>thứ duy nhất nó có</b>.</p>",
+ "prompt_intro": "Bốn nhóm theo đúng nhịp một kỳ: <b>đọc nguồn &rarr; đọc khách &rarr; chấm người &rarr; kiểm trước khi phát</b>. ★ Và mọi lệnh đọc khách / chấm người đều có <b><code>--dong a</code> hoặc <code>--dong d</code></b> — ⛔ <b>cố tình không có lệnh chạy cả hai dòng</b>, vì một lệnh gộp là một mẫu số trộn.",
+ "nhom_prompt": [
+  {
+   "ma": "doc",
+   "ten": "★ ĐỌC · chạy trước tiên"
+  },
+  {
+   "ma": "insight",
+   "ten": "Luồng I · đọc khách"
+  },
+  {
+   "ma": "qc",
+   "ten": "Luồng Q · chấm người"
+  },
+  {
+   "ma": "phat",
+   "ten": "Trước khi phát hành"
+  }
+ ],
+ "prompts": [
+  {
+   "nhom": "doc",
+   "ten": "Gõ một câu ngắn",
+   "kieu": "chuẩn",
+   "noi_dung": "ĐỌC hội thoại kỳ 28/10–03/11.\n<đính kèm file hội thoại>"
+  },
+  {
+   "nhom": "doc",
+   "ten": "Có bối cảnh — tốt hơn",
+   "kieu": "★ hay gặp",
+   "noi_dung": "ĐỌC hội thoại kỳ 28/10–03/11.\n\nĐính kèm:\n · 180 hội thoại (Messenger · Instagram DM · Viber)\n · ⚠ CHƯA có số ads cùng kỳ\n\n⚠ Lưu ý về mẫu:\n · trường \"Your area\" trên form vẫn là ô text tự do\n · bản xuất ⛔ KHÔNG có cột kênh cho 40 hội thoại đầu\n\nIn CỔNG N đủ năm ô rồi DỪNG. ⛔ Chưa kết luận gì.\n⛔ KHÔNG đoán dòng, ⛔ KHÔNG đoán vành đai."
+  },
+  {
+   "nhom": "doc",
+   "ten": "Khi V0 vượt ngưỡng",
+   "kieu": "★",
+   "noi_dung": "CỔNG G báo V0 = 56%. Giải thích cho tôi:\n\n① Vì sao 56% V0 làm MỌI kết luận theo vành đai ⛔ không dùng được?\n② Cái gì VẪN đọc được dù V0 cao?\n③ Việc gì gỡ được ô này, và ai làm?\n\n⛔ KHÔNG điền vành đai cho đủ. ⛔ KHÔNG suy từ post khách vào."
+  },
+  {
+   "nhom": "doc",
+   "ten": "Dán tay / ảnh chụp",
+   "kieu": "chuẩn",
+   "noi_dung": "ĐỌC thêm đoạn này, kỳ 28/10–03/11 — dán tay từ Viber:\n\n\"khach hoi all on 4 bao nhieu, minh noi de bac si bao gia\"\n\n⚠ Xử đúng luật dán tay:\n · ⛔ KHÔNG có khuôn HT-nnn → gắn nhãn \"nguồn dán tay\"\n · ghi NGUYÊN VĂN vào phụ lục, kèm ai dán và lúc nào\n · ⛔ KHÔNG vào ngưỡng mẫu của bất kỳ kết luận nào"
+  },
+  {
+   "nhom": "insight",
+   "ten": "Phác chân dung một dòng",
+   "kieu": "★ hay gặp",
+   "noi_dung": "INSIGHT dòng d, kỳ 28/10–03/11.\n\n① PHÁC chân dung từ CHÍNH hội thoại kỳ này.\n   Mỗi chân dung mang ĐÚNG MỘT NHÃN: KHUÔN / PHÁC / CHUẨN / MỎNG.\n② Mỗi chân dung cần BA thứ:\n   · ≥3 TRÍCH NGUYÊN VĂN lời khách, mỗi trích có HT-nnn\n   · CÂU HỎI NGẦM\n   · VIỆC NỘI DUNG — và SLOT nào đang chặn nó\n③ Chạy NĂM CỔNG ỔN ĐỊNH cho dòng d RIÊNG.\n④ ĐỐI CHIẾU với CD1–CD6 của sổ nhập: ⛔ KHÔNG khớp ở chỗ nào?\n⑤ DỪNG ở CỔNG 0. ⛔ KHÔNG tự duyệt, ⛔ KHÔNG viết hook.\n\n★ Nhưng VIỆC HỆ THỐNG và CỜ ĐỎ ĐẾM TỔNG thì in NGAY."
+  },
+  {
+   "nhom": "insight",
+   "ten": "Ba nhánh rơi",
+   "kieu": "★★ quan trọng nhất",
+   "noi_dung": "Dòng d kỳ này: 9/21 hội thoại hỏi \"how long\" rồi im.\nKhách rơi vì AI?\n\nChạy phép thử CHO TỪNG phát hiện, TRƯỚC khi gọi là lỗi người:\n  \"Người giỏi nhất của khối, với đúng những gì hệ thống cấp\n   hôm nay, có trả lời khác được không?\"\n\n  ⛔ KHÔNG → nhánh HỆ. Vào mục việc hệ thống, có tên người cấp.\n            ⛔ KHÔNG vào luồng Q. ⛔ KHÔNG vào nội dung đào tạo.\n  ✅ CÓ    → có thể là nhánh NGƯỜI → chuyển luồng Q đối chiếu.\n\n⚠ HAI nhánh HỆ và NỘI DUNG có thể CÙNG ĐÚNG → in CẢ HAI.\n  Chọn một cho gọn thì nhánh kia ⛔ KHÔNG AI SỬA."
+  },
+  {
+   "nhom": "insight",
+   "ten": "Bảng độ nóng có HOT*",
+   "kieu": "★ bắt buộc",
+   "noi_dung": "So độ nóng giữa các nhóm DV-D*, dòng d.\n\n⚠ BẮT BUỘC có cột HOT* — tính lại ⛔ KHÔNG có bit bị cách chia\n  nhóm cấy vào:\n    chia theo DV-*      → bỏ bit ①\n    chia theo chặng/rào → bỏ bit ②③\n    chia theo vành đai  → bỏ bit ④\n    chia theo chân dung → bỏ bit ①②③\n\n★ In thêm cột CHÊNH (HOT − HOT*). Chênh lớn = độ nóng phần lớn\n  do CÁCH CHIA NHÓM, ⛔ không do khách.\n⛔ KHÔNG so HOT* chéo giữa hai cách chia nhóm khác nhau."
+  },
+  {
+   "nhom": "insight",
+   "ten": "Hội thoại ngắn — nhóm hay bị bỏ",
+   "kieu": "★",
+   "noi_dung": "Đọc RIÊNG nhóm hội thoại ≤2 lượt khách, dòng a.\n\n① Câu hỏi ĐẦU TIÊN của họ là gì? (liệt kê nguyên văn)\n② Họ im sau câu trả lời NÀO?\n③ Bao nhiêu % im ngay sau khi bị XIN SỐ?\n\n★ Nhóm này gần như luôn ĐÔNG NHẤT và nó là nhóm MẤT KHÁCH.\n  Hội thoại dài thì khách ĐÃ Ở LẠI — tức là đã có gì đó đúng.\n⛔ KHÔNG kết luận \"khách ⛔ không thật sự quan tâm\" — đó là kết\n  luận an toàn cho người viết báo cáo và ⛔ không dùng được cho ai."
+  },
+  {
+   "nhom": "insight",
+   "ten": "Hook viết được NGAY",
+   "kieu": "★ hay gặp",
+   "noi_dung": "Slot ③④⑤⑥⑦ còn treo. Vậy hook nào viết được NGAY hôm nay\nmà ⛔ KHÔNG cần ô dữ liệu nào mới?\n\nChỉ dùng dữ kiện trong bảng ✅ \"dùng được\" của sw-G §2.\nMỗi hook cần: rào gỡ · chặng · chân dung · TRÍCH KHÁCH LÀM GỐC\n· micro-conversion · khối CLAIM CẦN PHÁP CHẾ DUYỆT.\n\n⛔ KHÔNG dùng lại sáu câu ⛔ không dùng được của site — kể cả khi\n  chúng ĐANG trên trang nên trông như đã được duyệt."
+  },
+  {
+   "nhom": "insight",
+   "ten": "Ma trận ưu tiên",
+   "kieu": "chuẩn",
+   "noi_dung": "MA TRẬN ƯU TIÊN, kỳ 28/10–03/11.\n\nIn HAI ma trận (một cho mỗi dòng) + MỘT mục việc hệ thống dùng chung.\n\n★ Xếp theo SỐ HỘI THOẠI ẢNH HƯỞNG, ⛔ KHÔNG theo tỷ lệ xấu nhất.\n⛔ KHÔNG quy ra tiền (⛔ chưa có giá trị đơn do khối chốt).\n\nViệc ở ô ② (ảnh hưởng nhiều · chặn bởi slot) ghi thành:\n  \"⏸ CẤP DỮ KIỆN: <cái gì> → <ai cấp> · chặn: <cái gì>\n   ★ GỠ LUÔN: <n hook> + <n micro> + <ô TC nào>\"\n⛔ KHÔNG ghi thành \"viết nội dung về ...\" — ⛔ không viết được,\n  và ghi thế thì kỳ sau nó xuất hiện lại nguyên văn.\n\nDỪNG ở CỔNG 1. ⛔ Agent ⛔ KHÔNG tự chọn làm gì."
+  },
+  {
+   "nhom": "qc",
+   "ten": "Chấm một dòng",
+   "kieu": "★ hay gặp",
+   "noi_dung": "QC dòng d, kỳ 28/10–03/11.\n\n① Chấm TC-1…TC-10. \"—\" = ⛔ KHÔNG CHẤM ĐƯỢC, ⛔ KHÔNG phải ô trượt.\n   ★ Ô \"—\" ⛔ KHÔNG vào mẫu số.\n② Chạy ĐỦ NĂM RÀO AN TOÀN:\n   ① <10 HT → in số thật, ⛔ KHÔNG gán loại\n   ② ô ✗ ⛔ không có HT-nnn + CẶP CÂU → đổi thành \"—\"\n   ③ LỖI HỆ ⛔ KHÔNG TRỪ NGƯỜI (phép thử từng ô ✗)\n   ④ câu chân bảng + ⛔ không đề xuất kỷ luật\n   ⑤ ★ CHẤM RIÊNG THEO DÒNG\n③ Mục VIỆC HỆ THỐNG — có tên người CẤP dữ kiện\n④ Cờ đỏ — MỤC RIÊNG, ⛔ KHÔNG trừ vào `diem`"
+  },
+  {
+   "nhom": "qc",
+   "ten": "Người trực cả hai dòng",
+   "kieu": "★",
+   "noi_dung": "NV-04 trực cả dòng a và dòng d. Chấm thế nào?\n\n★ HAI ĐIỂM, ⛔ KHÔNG một điểm trung bình.\n\n  dòng a: 82% (B)  ·  dòng d: 41% (D)\n  ⛔ KHÔNG gộp thành 68% (C).\n\n★ Số 68% dẫn tới việc SAI: \"kèm cặp chung\".\n  Hai số dẫn tới việc ĐÚNG: \"⛔ chưa được cấp kiến thức dòng d\".\n\n⚠ Và kiểm xem 41% kia có phải vấn đề của người đó không —\n  nếu 7 slot 🔴 dòng d còn treo thì phần lớn là ô \"—\" bị chấm\n  thành \"✗\" vì rào ③ CHƯA CHẠY.\n\n⚠ Ngưỡng 10 HT áp TỪNG DÒNG, ⛔ không gộp hai dòng cho đủ."
+  },
+  {
+   "nhom": "qc",
+   "ten": "Cờ đỏ — miễn trừ xét trước",
+   "kieu": "★★ bắt buộc",
+   "noi_dung": "Soát cờ đỏ CĐ-S1…CĐ-S10, dòng d, kỳ này.\n\n★ XÉT MIỄN TRỪ TRƯỚC, với MỌI mã:\n  \"we don't guarantee\" · \"can't promise\" · \"results vary\"\n  \"let me confirm with the clinic\" · \"I'll get back to you\"\n  \"I'd need the patient's consent first\"\n  \"only the doctor can assess\" · \"we don't offer that\"\n  → ⛔ KHÔNG NÊU CỜ. Đó là người ĐANG LÀM ĐÚNG.\n\n★ CĐ-S5 phải báo KÈM số lượt làm đúng:\n  \"6 lượt tự nghĩ ra số — VÀ 11 lượt chọn cách đúng\"\n  ⚠ Thiếu số thứ hai thì cùng dữ kiện đọc thành \"6 lượt nhân\n    viên nói sai\" — một kết luận về CON NGƯỜI rút ra từ một\n    Ô TRỐNG CỦA HỆ THỐNG.\n\n★ Và in DÒNG ĐỐI CHIẾU SITE cho mỗi mã."
+  },
+  {
+   "nhom": "qc",
+   "ten": "Sổ tay một người",
+   "kieu": "chuẩn",
+   "noi_dung": "Sổ tay cho NV-04, kỳ 28/10–03/11.\n\nMỘT TRANG. Hai phần (dòng a · dòng d).\n  ✅ GIỮ : 1 việc + cặp câu bằng chứng\n  🔁 ĐỔI : 2 việc + cặp câu + câu thay thế có NHÃN DUYỆT\n       (✅ ĐÃ DUYỆT / 🔶 CHỜ DUYỆT / ⏸ CHỜ DỮ KIỆN)\n\n★ MỤC BẮT BUỘC: \"⛔ KHÔNG PHẢI VIỆC CỦA BẠN\" — liệt kê các ô \"—\"\n  là việc hệ thống, kèm AI CẤP.\n  ⚠ Thiếu mục này thì người đọc thấy ba ô \"—\" và tự hiểu là mình\n    thiếu sót → kỳ sau họ sẽ TỰ NGHĨ RA MỘT CON SỐ để lấp.\n    ★ Tức là bỏ mục này TẠO RA chính cờ CĐ-S5.\n\n⛔ KHÔNG viết việc hệ thống vào sổ tay.\n⛔ KHÔNG so sánh với người khác, kể cả bằng mã.\n⛔ KHÔNG có lời khách của người khác."
+  },
+  {
+   "nhom": "phat",
+   "ten": "CỔNG T — tám câu",
+   "kieu": "★★ bắt buộc",
+   "noi_dung": "CỔNG T — kiểm HAI TƯỜNG cho <tên file>.\n\n── TƯỜNG L · chặn LỌT TÊN ──\n① tên nhân viên trong file luồng I → ⛔ DỪNG (kiểm cả TÊN FILE)\n② khoá `nv` `tc*` `diem` `loai` trong insight → phải KHÔNG CÓ KHOÁ\n③ khoá `cd` `hook` `ma_tran` `ads` trong qc → phải KHÔNG CÓ\n④ trích khách trong qc chỉ giữ ĐÚNG cặp câu bằng chứng\n\n── TƯỜNG D · chặn TRỘN SỐ ──\n⑤ ★ mọi tỷ lệ có `dong` = a | d | ky chưa? (câu DỄ TRƯỢT NHẤT)\n⑥ ★ mẫu số: nhãn a → n(a) · nhãn d → n(d)\n         nhãn ky → SỐ HT PHÂN BIỆT, ⛔ KHÔNG phải n(a)+n(d)\n\n── CHUNG ──\n⑦ ⛔ không SĐT · email · ảnh · link; nhóm <10 đã ẩn % chưa\n⑧ câu chân bảng (Q) + dòng khai mẫu tiếng Anh (cả hai luồng)"
+  },
+  {
+   "nhom": "phat",
+   "ten": "Khi ai đó xin một con số tổng",
+   "kieu": "★ hay gặp",
+   "noi_dung": "Họp tuần cần MỘT slide có MỘT tỷ lệ chốt cho cả phòng khám.\n\n⛔ KHÔNG. Đưa HAI con số kèm HAI mẫu số.\nBuổi họp cần một con số thì NGƯỜI CHỦ TRÌ chọn — ⛔ không phải\nagent trộn hộ.\n\n⚠ Đây là cách tường D bị phá THƯỜNG XUYÊN NHẤT, vì yêu cầu nghe\n  rất hợp lý và người xin ⛔ KHÔNG BIẾT mình đang xin điều gì.\n\nGiải thích giúp tôi, bằng một ví dụ từ số của kỳ này, con số\ntrộn đó sẽ dẫn tới quyết định sai thế nào."
+  },
+  {
+   "nhom": "phat",
+   "ten": "Bản gửi ra ngoài khối",
+   "kieu": "★",
+   "noi_dung": "Rút gọn để gửi BAN ĐIỀU HÀNH — ngoài khối.\n\n⛔ BỎ lát cắt theo người (NV-xx).\n⛔ BỎ phụ lục nguyên văn.\n⛔ KHÔNG gửi out/doc-hoi-thoai.json — nó chứa nhánh q.\n   ⚠ Và nó là file DỄ BỊ GỬI NHẤT vì tên nghe như một file tạm.\n✅ GIỮ NGUYÊN mục VIỆC HỆ THỐNG — kèm tên người cấp.\n✅ GIỮ dòng khai mẫu tiếng Anh.\n\n★ Mục việc hệ thống là mục DUY NHẤT ⛔ không bị rút gọn: nó là\n  phần người ngoài khối PHẢI THẤY MỚI GỠ ĐƯỢC."
+  }
+ ],
+ "prompt_ghi": "<p style=\"margin-bottom:0\"><b>Vì sao mọi prompt ra việc đều kèm phép thử lỗi hệ?</b> Vì ở kỳ đầu, <b>bảy slot 🔴</b> đang treo — nghĩa là <b>phần lớn ô <code>✗</code> ⛔ không phải lỗi của ai trong khối</b>. Một nhân viên ⛔ không trả lời được <i>&ldquo;bao lâu thì tôi có răng&rdquo;</i> vì <b>bác sĩ chưa cấp khoảng tháng</b>, ⛔ không vì họ chưa được đào tạo. ★ Và prompt <b>&ldquo;ai đó xin một con số tổng&rdquo;</b> là prompt <b>hay bị yêu cầu nhất và dễ nhượng bộ nhất</b> — vì yêu cầu nghe rất hợp lý, và người xin ⛔ <b>không biết mình đang xin điều gì</b>.</p>",
+ "dieu_intro": "Sáu điều này là phần dễ bỏ qua nhất khi cài, và cũng là phần gây ra những con số <b>trông hợp lý mà sai</b> — loại sai ⛔ <b>không nhìn ra được từ bảng</b>.",
+ "dieu": [
+  {
+   "pre": "Điều 1",
+   "h3": "Hai tường, và chúng ⛔ không cùng loại",
+   "html": "<div class=\"note stop\"><p style=\"margin-bottom:0\"><b>Tường D chặn PHÉP CHIA. Tường L chặn TRƯỜNG DỮ LIỆU.</b> Hiểu sai chỗ này là dựng ra một repo phức tạp gấp bốn mà ⛔ không chặn được gì.</p></div><div class=\"tw\" style=\"margin-top:4px\"><table style=\"min-width:0\"><tbody><tr class=\"hl\"><td><b>TƯỜNG D</b> <i>(dòng)</i></td><td>⛔ Không <b>tỷ lệ</b> nào có mẫu số trộn <code>a</code>+<code>d</code>. Vi phạm = một con số trông hợp lý mà ⛔ <b>không nói về ai cả</b></td></tr><tr class=\"hl\"><td><b>TƯỜNG L</b> <i>(luồng)</i></td><td>⛔ Không <b>file</b> nào có cả tên nhân viên và lời khách. Vi phạm = một <b>con người</b> bị nêu tên trong file ⛔ không dành cho họ</td></tr></tbody></table></div><p style=\"margin-bottom:0\">★ Vì hai tường tác động lên <b>hai tầng khác nhau</b>, cấu trúc chỉ cần lồng <b>một lần</b> — <code>a/d</code> × <code>i/q</code>. ⚠️ ⛔ <b>Không dựng bốn file rời</b> ở bước đọc: bốn file rời là <b>bốn lần đọc</b>, và bốn lần đọc là <b>bốn bộ số lệch nhau</b> — thứ phá hỏng một báo cáo nhanh hơn mọi lỗi khác.</p>"
+  },
+  {
+   "pre": "Điều 2",
+   "h3": "Hai dòng khác nhau ở quyết định mua, ⛔ không ở dịch vụ",
+   "html": "<div class=\"note stop\"><p style=\"margin-bottom:0\">Nếu khác nhau chỉ ở <i>&ldquo;một bên làm da, một bên làm răng&rdquo;</i> thì <b>một cột <code>dong</code> là đủ</b>. Khác nhau thật nằm ở <b>hình dạng của quyết định</b>: dòng <code>a</code> là <b>nhiều lần nhỏ lặp lại</b>, hiệu quả <b>có thời hạn</b>; dòng <code>d</code> là <b>một lần lớn</b>, chờ xương liền <b>nhiều tháng</b>, kết quả gần vĩnh viễn.</p></div><p>Nên rào thứ tư khác nhau: <b><code>BỀN</code></b> <i>(&ldquo;năm sau còn phải trả bao nhiêu&rdquo;)</i> so với ★ <b><code>LÂU</code></b> <i>(&ldquo;bao lâu thì tôi có răng&rdquo;)</i>. Và chặng quyết định khác nhau: <code>S4</code> so với <code>SD4</code>.</p><p style=\"margin-bottom:0\">★ <b>Bằng chứng rằng <code>LÂU</code> là rào thật:</b> site của chính cơ sở đang bán vào đúng rào đó — <i>&ldquo;2× faster bone integration&rdquo;</i>. ⚠️ Và một con số <code>44%</code> trộn hai dòng dẫn tới <b>hai việc khác nhau hoàn toàn</b>: dòng <code>a</code> cần <b>bảng liệu trình</b> <i>(nội dung)</i>, dòng <code>d</code> cần <b>trả góp / HMO</b> <i>(chính sách)</i>. Người đọc sẽ chọn <b>MỘT</b>.</p>"
+  },
+  {
+   "pre": "Điều 3",
+   "h3": "Nêu cờ cho một người đang làm đúng là lỗi nặng nhất hệ này có thể mắc",
+   "html": "<div class=\"note stop\"><p style=\"margin-bottom:0\"><i>&ldquo;I can't promise a specific result &mdash; only the doctor can assess that. We don't guarantee outcomes.&rdquo;</i><br>Câu này <b>chứa</b> <code>promise</code> và <code>guarantee</code>. Khớp từ khoá đơn thuần → nêu cờ <code>CĐ-S1</code>. ★ Trong khi đây là người <b>đang TỪ CHỐI cam kết</b>, đúng quy trình.</p></div><p>★ Vì vậy mỗi mã cờ có <b>danh sách cụm miễn trừ</b>, và máy xét <b>miễn trừ TRƯỚC</b>. Hai cụm đáng khen nhất và dễ bị phạt oan nhất: <i>&ldquo;let me confirm with the clinic&rdquo;</i> khi hệ <b>chưa cấp</b> con số, và <i>&ldquo;I'd need the patient's consent first&rdquo;</i> khi khách xin ảnh ca thật.</p><p style=\"margin-bottom:0\">⚠️ <b>Lỗi này nặng hơn bỏ sót một cờ.</b> Một cờ sai làm hỏng niềm tin vào <b>cả bảng</b> — và khi khối thôi tin thì <b>dữ liệu đầu vào hỏng theo</b>: hội thoại được trả lời cho đẹp bảng chấm chứ ⛔ không cho khách. Lúc đó agent mất <b>thứ duy nhất nó có</b>. ★ Cùng họ với nó là lỗi <b>gán <code>cap-tinh</code> oan</b> cho một ca <code>CD-D5</code> — <b>miễn hết các ô chấm</b>, tức là <b>mất phần khen đúng</b>.</p>"
+  },
+  {
+   "pre": "Điều 4",
+   "h3": "Luật chống vòng tròn — % HOT*",
+   "html": "<div class=\"note stop\"><p style=\"margin-bottom:0\">Năm tín hiệu độ nóng ⛔ <b>không độc lập với cách chia nhóm</b>. Chia theo <code>DV-*</code> thì mọi hội thoại trong nhóm <b>đã có bit ①</b> — <b>theo định nghĩa</b>. Chia theo chặng hay rào thì đã có bit ②③. Chia theo vành đai thì đã có bit ④.</p></div><p>→ Nên <b>nhóm nào cũng &ldquo;nóng hơn trung bình&rdquo;</b>, theo <b>cấu trúc</b>, ⛔ không theo dữ liệu. Và kết luận <i>&ldquo;nhóm <code>DV-D4</code> nóng nhất, dồn ngân sách vào đó&rdquo;</i> là một kết luận <b>tự chứng minh chính nó</b>.</p><p style=\"margin-bottom:0\">★ <b>Bắt buộc:</b> mọi bảng so độ nóng có thêm cột <b><code>HOT*</code></b> — tính lại ⛔ không có bit đã bị cấy. ⛔ <b>Thiếu cột đó thì bảng ⛔ không được dùng để xếp thứ tự ưu tiên.</b> Và cái đáng chú ý là <b>KHOẢNG CHÊNH</b>: chênh lớn = độ nóng phần lớn do cách chia nhóm.</p>"
+  },
+  {
+   "pre": "Điều 5",
+   "h3": "Lỗi hệ ⛔ không trừ người — và ở kỳ đầu, phần lớn ô ✗ là lỗi hệ",
+   "html": "<div class=\"note stop\"><p style=\"margin-bottom:0\"><b>Phép thử một câu, chạy cho TỪNG ô ✗:</b> <i>&ldquo;Người giỏi nhất của khối, với đúng những gì hệ thống cấp hôm nay, có làm khác được không?&rdquo;</i> &mdash; ⛔ <b>Không</b> → ô đó = <code>&mdash;</code>, và dòng đó vào <b>mục việc hệ thống</b>, có <b>tên người CẤP</b> dữ kiện.</p></div><p>★ <b><code>TC-8</code> là ô duy nhất CỘNG ĐIỂM cho việc ⛔ không trả lời.</b> Khi slot còn treo, <i>&ldquo;let me confirm with the clinic&rdquo;</i> là <b>cách xử lý đúng</b> → <code>TC-8</code> ✓. Còn <i>&ldquo;around 2 to 3 months lang po&rdquo;</i> <b>nghe như một câu trả lời tốt</b> nhưng là ✗ + cờ <code>CĐ-S5</code>.</p><p style=\"margin-bottom:0\">⚠️ <b>Ở kỳ đầu, <code>TC-9</code> là <code>&mdash;</code> cho gần như mọi hội thoại ở cả hai dòng</b> — và đó là <b>kết quả đúng</b>. Một báo cáo kỳ đầu có <code>TC-9</code> chấm ✗ nhiều là báo cáo <b>chưa chạy phép thử trên</b>. ★ Mục việc hệ thống sẽ <b>dài hơn</b> phần chấm điểm, và đó là dấu hiệu bảng chấm <b>đang chạy đúng</b>.</p>"
+  },
+  {
+   "pre": "Điều 6",
+   "h3": "Chỉ đọc tiếng Anh — và điều đó có giá, phải khai ra",
+   "html": "<div class=\"note stop\"><p style=\"margin-bottom:0\">Bỏ ba thứ tiếng còn lại ⛔ <b>không trung tính</b> — nó <b>lệch mẫu theo đúng những nhóm đáng chú ý nhất</b>.</p></div><div class=\"tw\" style=\"margin-top:4px\"><table style=\"min-width:0\"><tbody><tr><td><b>Taglish</b></td><td>Mất nhóm <b>Messenger</b> — kênh số 1 ở PH. <i>&ldquo;magkano po ang thread lift&rdquo;</i> ⛔ không khớp <code>price</code> → hội thoại bị đọc là <b>⛔ không hỏi giá</b></td></tr><tr><td><b>Filipino</b></td><td>Mất nhóm <b>nhạy giá</b> và <code>V3</code> xa trung tâm → <code>V3</code> trông <b>dễ chốt hơn thật</b></td></tr><tr class=\"hl\"><td><b>Tiếng Hàn</b></td><td>Mất <b>nhóm <code>N1</code></b> — nhóm khớp nhất với định vị K-beauty, ngay cạnh phòng khám. ⛔ <b>Không xuất hiện ở báo cáo nào</b></td></tr><tr><td><b>Farsi</b></td><td>Khách của <code>Dr. Shilan</code> — site nha khoa <b>công bố phục vụ Farsi</b>. ⛔ Chưa rõ nhóm này lớn cỡ nào</td></tr></tbody></table></div><p style=\"margin-bottom:0\">★ Vì vậy <b>mọi báo cáo BẮT BUỘC in dòng khai mẫu</b>. ⛔ <b>Không bỏ cho gọn</b> — một mẫu lệch mà ⛔ không khai là một mẫu lệch người đọc <b>tưởng là đầy đủ</b>, và đó là cách một con số <b>đúng về mặt tính toán</b> dẫn tới một <b>quyết định sai</b>.</p>"
+  }
+ ],
+ "chan_intro": "Agent cài xong là <b>chạy được ngay</b> phần đọc hội thoại · tách hai dòng · dựng hai nhánh · chấm <code>TC-1</code>–<code>TC-10</code> · soát cờ đỏ · đổi mã · chạy CỔNG T. Nhưng có <b>mười bốn việc phải có người cấp</b> thì nó mới dùng được thật — và <b>bảy việc đầu đang chặn nặng</b>.",
+ "chan": [
+  {
+   "muc": "🔴",
+   "viec": "★★ <b>Phạm vi giấy phép: hai dòng nằm dưới MỘT hay HAI?</b>",
+   "ai": "Pháp chế",
+   "chan": "⛔ <b>Chặn tất cả.</b> Ở PH, <i>quảng cáo dịch vụ ngoài phạm vi giấy phép</i> là <b>rủi ro pháp lý nặng nhất</b> — ⛔ không phải rủi ro câu chữ. ★ Sự tồn tại của site nha khoa ⛔ <b>không gỡ</b> lỗi ② của sổ nhập, nó chỉ <b>đổi câu hỏi</b>.",
+   "hl": true
+  },
+  {
+   "muc": "🔴",
+   "viec": "★ <b>Hotline đúng là số nào</b> — hai site lệch <b>4 số cuối</b>",
+   "ai": "Vận hành",
+   "chan": "Mọi hook có số gọi. ⚠️ Một trong hai sai thì <b>lead gọi vào ⛔ không tới ai</b>, và ⛔ không ai phát hiện vì người gọi ⛔ không gọi lại lần hai. ★ <b>Ô rẻ nhất để gỡ</b> — chỉ cần gọi thử hai số.",
+   "hl": true
+  },
+  {
+   "muc": "🔴",
+   "viec": "★★ <b>Khoảng tháng từ cắm đến răng cuối</b>, theo từng <code>DV-D*</code>",
+   "ai": "Bác sĩ",
+   "chan": "⛔ <b>Toàn bộ rào <code>LÂU</code></b> → chặng <code>SD4</code>, <b>chặng quyết định của dòng <code>d</code></b>. Gỡ ô này gỡ luôn <b>4 hook</b> + <b>1 micro-conversion</b> + ô <code>TC-9</code>.",
+   "hl": true
+  },
+  {
+   "muc": "🔴",
+   "viec": "<b>Số lần hẹn</b> trong một ca implant",
+   "ai": "Bác sĩ",
+   "chan": "Câu ③ của rào <code>LÂU</code>."
+  },
+  {
+   "muc": "🔴",
+   "viec": "★ <b>Có răng tạm trong lúc chờ không</b>",
+   "ai": "Bác sĩ",
+   "chan": "Câu ④ của rào <code>LÂU</code> — ★ câu <b>gần như ⛔ không phòng khám nào trả lời</b>, và là câu <b>quyết định với khách còn đi làm</b> <i>(tức đúng nhóm <code>N2</code> ngồi cạnh phòng khám)</i>.",
+   "hl": true
+  },
+  {
+   "muc": "🔴",
+   "viec": "<b>Tên hệ implant + số đăng ký FDA PH</b> <i>(<code>DV-D1</code>)</i>",
+   "ai": "Vận hành + Pháp chế",
+   "chan": "Ô ⑦ checklist 12 ô · rào <code>NGỜ</code>②. ⚠️ <i>&ldquo;Smart Bio Implant&rdquo;</i> là một <b>tên thương mại</b>, ⛔ không phải tên hệ implant có thể truy."
+  },
+  {
+   "muc": "🔴",
+   "viec": "★ <b>Có nhận HMO nào không, cho dịch vụ nào</b>",
+   "ai": "Vận hành",
+   "chan": "⛔ <b>Toàn bộ nhóm <code>N2</code></b> ở dòng <code>d</code> — nhóm <b>ngồi ngay cạnh</b> phòng khám. ★ Ở PH, câu đầu tiên của nhân sự văn phòng ⛔ không phải giá mà là <i>&ldquo;có nhận HMO không&rdquo;</i>. Gỡ bằng <b>một email nội bộ</b>.",
+   "hl": true
+  },
+  {
+   "muc": "🟠",
+   "viec": "<b>T&amp;C bảo hành bằng văn bản</b> <i>(veneer · crown · implant)</i>",
+   "ai": "Pháp chế",
+   "chan": "Rào <code>NGỜ</code>②. ⚠️ Site <b>đang hứa</b> <i>&ldquo;written warranty&rdquo;</i> mà ⛔ <b>chưa có văn bản</b> — nên nhân viên nhắc lại câu đó ⛔ <b>không phải lỗi đào tạo</b>."
+  },
+  {
+   "muc": "🟠",
+   "viec": "<b>Giá từng <code>DV-D*</code></b> + có trả góp không",
+   "ai": "Phòng khám + Kế toán",
+   "chan": "Chặng <code>SD5</code>."
+  },
+  {
+   "muc": "🟠",
+   "viec": "<b>Có làm chỉnh nha không</b>",
+   "ai": "Vận hành",
+   "chan": "<code>Dr. Shilan</code> có bằng <b>Straightwire orthodontics</b> nhưng 7 dịch vụ công bố ⛔ không có chỉnh nha. ★ Có mà ⛔ không công bố = <b>bỏ một dòng nhu cầu</b>; ⛔ không có mà bằng cấp gợi ra = <b>đúng hình dạng của lỗi ②</b>."
+  },
+  {
+   "muc": "🟠",
+   "viec": "<b>Nguồn của claim <i>&ldquo;2× faster&rdquo;</i></b>",
+   "ai": "Marketing + Bác sĩ",
+   "chan": "Ô ④ checklist. ★ Hoặc <b>bỏ claim</b>, thay bằng <b>khoảng tháng thật</b> ở slot ③ — một con số tháng <b>mạnh hơn</b> một con số <code>2×</code>, vì khách ⛔ không biết mốc gốc là bao nhiêu."
+  },
+  {
+   "muc": "🟡",
+   "viec": "<b>Bảng tên nhân viên trực page</b> theo dòng",
+   "ai": "Trưởng nhóm",
+   "chan": "⛔ <b>Toàn bộ luồng Q.</b> ⚠️ Giữ riêng — <code>ma-nhan-vien.csv</code> bị <code>.gitignore</code> chặn <b>từ commit đầu</b>."
+  },
+  {
+   "muc": "🟡",
+   "viec": "<b>Ai trực kênh nào, giờ nào</b>",
+   "ai": "Vận hành",
+   "chan": "Ô <code>TC-1</code> và luật ngoài giờ <i>(site mở 9AM–6PM)</i>."
+  },
+  {
+   "muc": "⚪",
+   "viec": "Có nhân sự nói <b>tiếng Hàn</b> không",
+   "ai": "Vận hành",
+   "chan": "Nhóm <code>N1</code> — ⚠️ nhưng bản này ⛔ <b>chưa đọc được tiếng Hàn</b>, nên gỡ slot này <b>chưa đủ</b> để đọc nhóm đó."
+  }
+ ],
+ "chan_ghi": [
+  {
+   "kieu": "stop",
+   "html": "<p style=\"margin-bottom:0\"><b>Bộ ba slot ③④⑤ khác về bản chất với mười một dòng còn lại.</b> Thiếu chúng thì repo <b>vẫn ĐỌC được</b> hội thoại nha khoa, <b>vẫn ĐẾM được</b> khách tắc ở đâu — nhưng ⛔ <b>không viết được một hook nào cho <code>SD4</code></b>, chặng quyết định của dòng đó. ★ Nghĩa là: <b>biết chính xác khách tắc ở đâu, và ⛔ không gỡ được.</b> ⚠️ Đó là <b>trạng thái tệ nhất</b>, vì nó <b>TRÔNG như đang chạy</b>.</p>"
+  }
+ ],
+ "footer": "<b>Agent đọc khách, tách hai dòng, chấm người, và phân lỗi hệ / lỗi người. Bác sĩ cấp mốc chuyên môn, pháp chế duyệt câu chữ và chốt phạm vi giấy phép, vận hành chốt HMO và hotline, trưởng nhóm kèm người.</b> ⛔ Agent không làm thay bốn việc sau, và ⛔ không ra quyết định nào về con người."
+}
