@@ -222,3 +222,4 @@ Bảng đầy đủ **14 slot**: [`sw-E`](knowledge/sw-E-module-sunwoo.md) §5.
 | [`doc/01-cai-dat.md`](doc/01-cai-dat.md) | Ba cách cài · khuôn file hội thoại · **10 câu kiểm sau khi cài** |
 | [`doc/CHANGELOG.md`](doc/CHANGELOG.md) | Quyết định kiến trúc · ★ **năm lỗi bắt được khi chạy thử** |
 | [`prompts/`](prompts/) | 4 prompt: `đọc` · `insight` · `qc` · `tường ngăn` |
+"# Agent-InsightDashboard-Sunwoo" 
