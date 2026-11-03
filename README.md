@@ -4,6 +4,13 @@
 
 `v1.0` · 03/11/2026 · **Philippines** · hai dòng: [sunwooaesthetic.ph](https://sunwooaesthetic.ph/) · [sunwoodental.ph](https://sunwoodental.ph/)
 
+### 📘 [**Hướng dẫn cài đặt & prompt mẫu →**](https://claude.ai/artifact/6qS15rkfAPoTpyyoxu23vh)
+*(4 mục · 3 tab nền tảng · **20 file bấm Copy từng file** · **17 prompt dán nguyên văn** · 10 câu smoke test · 14 việc đang chặn)*
+> ★ **Người mới thì mở trang đó trước, đừng đọc README.** Repo này là phần file để cài vào Project/GPT/Gem — trang hướng dẫn nói **khi nào dùng cái gì**.
+> ★ Cùng khuôn với [trang của gói KN-QT](https://claude.ai/artifact/E5U9He8ox1xmzxUz4hWN7E) và [gói Paris](https://claude.ai/artifact/B1qQBgUixjBjVwiiDwDTQJ) — sinh từ cùng một generator nên **nút Copy luôn khớp file nguồn**.
+> ★ Nguồn của trang: [`tools/huong-dan.json`](tools/huong-dan.json) → `python tools/trang-huong-dan.py` → [`tools/huong-dan.html`](tools/huong-dan.html). Sửa JSON rồi publish lại **cùng link**.
+> ⚠️ Artifact đang **riêng tư**. Người khác chỉ mở được sau khi chia sẻ qua menu **Share** trên trang.
+
 ---
 
 ## ★★ Một lần đọc · hai dòng · hai tường
